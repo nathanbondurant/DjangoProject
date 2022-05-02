@@ -65,6 +65,20 @@ def new_post(request):
     context = {'form':form}
     return render(request, 'FeedApp/new_post.html', context)
 
+@login_required
+def comments(request, post_id): #we want a link for comments to view all
+    if request.method == 'POST' and request.POST.get("btn1"): #lets us see if it was clicked bc it will be true
+        comment = request.POST.get("comment") #getting whatever is in the box
+        Comment.objects.create(post_id=post_id, username=request.user, text=comment, date_added=date.today())
+    
+    #need to get comments from database to display
+    comments= Comment.objects.filter(post=post_id)
+    post= Post.objects.get(id=post_id)
+    context = {'post':post, 'comments':comments}
+
+    return render(request, 'FeedApp/comments.html', context)
+
+
 
 
 
