@@ -108,11 +108,11 @@ def friends(request):
     admin_profile = Profile.objects.get(user=1)
     user_profile = Profile.objects.get(user=request.user)
     user_friends = user_profile.friends.all()
-    user_friends_profiles = Profile.objects.filter(user_in=user_friends)
+    user_friends_profiles = Profile.objects.filter(user__in=user_friends)
     user_relationships = Relationship.objects.filter(sender=user_profile)
     request_sent_profiles = user_relationships.values('receiver')
 
-    all_profiles = Profile.objects.exclude(user=request.user).exclude(id_in=user_friends_profiles).exclude(id_in=request_sent_profiles)
+    all_profiles = Profile.objects.exclude(user=request.user).exclude(id__in=user_friends_profiles).exclude(id__in=request_sent_profiles)
     request_received_profiles = Relationship.objects.filter(receiver=user_profile,status='sent')
 
     if not user_relationships.exists(): #filter works with exists
