@@ -34,7 +34,7 @@ class Relationship(models.Model):
 
 class Post(models.Model):
     description = models.CharField(max_length=255, blank=True)
-    username = models.ForeignKey(User, on_delete=models.CASCADE)
+    username = models.ForeignKey(User, on_delete=models.CASCADE) 
     image = models.ImageField(upload_to='images',blank=True)
     date_posted = models.DateTimeField(auto_now_add=True)
 
@@ -43,7 +43,7 @@ class Post(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    username = models.ForeignKey(User, related_name='details', on_delete=models.CASCADE)
+    username = models.ForeignKey(User, related_name='details', on_delete=models.CASCADE) #foreign key to user
     text = models.CharField(max_length=200)
     date_added = models.DateTimeField(auto_now_add=True,blank=True)
 

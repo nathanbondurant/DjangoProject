@@ -16,7 +16,7 @@ class ProfileForm(forms.ModelForm):
                     'last_name':'Last Name',
                     'email':'Email',
                     'dob':'Date of Birth',
-                    'bio':'Bio'}
+                    'bio':'Bio'} #what the fields actually show up as
 
 class RelationshipForm(forms.ModelForm):
     class Meta:
